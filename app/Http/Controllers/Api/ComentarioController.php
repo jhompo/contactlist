@@ -38,8 +38,7 @@ class ComentarioController extends Controller
     public function update(Request $request, Comentario $Comentario)
     {
         try {
-            $objComentario = Comentario::find($Comentario->id); 
-            $objComentario->update($request->all());
+            $Comentario->update($request->all());
             return response(['message' => 'Comentario actualizado satisfactoriamente', 'status' => 200]);
             
         } catch (ModelNotFoundException $e) {
@@ -51,7 +50,8 @@ class ComentarioController extends Controller
     
     public function destroy(Comentario $Comentario)
     {
-        $objComentario = Comentario::find($Comentario->id);
-        $objComentario->delete();
+        $Comentario->delete();
+        return response()->noContent();
+
     }
 }

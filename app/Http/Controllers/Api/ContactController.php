@@ -20,9 +20,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         Contact::create($request->all());
-        return response()->json([
-           'message' => 'Contacto creado satisfactoriamente'
-           ], 201);
+        return response()->json(['message' => 'Contacto creado satisfactoriamente'], 201);
     }
 
     
@@ -34,9 +32,8 @@ class ContactController extends Controller
     
     public function update(Request $request, Contact $contact)
     {
-        try {
-            $objContact = Contact::find($contact->id); 
-            $objContact->update($request->all());
+        try { 
+            $contact->update($request->all());
             return response(['message' => 'Contacto actualizado satisfactoriamente', 'status' => 200]);
             
         } catch (ModelNotFoundException $e) {
@@ -48,8 +45,8 @@ class ContactController extends Controller
     
     public function destroy(Contact $contact)
     {
-        $objContact = Contact::find($contact->id);
-        $objContact->delete();
+        $contact->delete();
+        return response()->noContent();
     }
-    
+
 }
