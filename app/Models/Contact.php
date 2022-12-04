@@ -18,17 +18,20 @@ class Contact extends Model
         "genero",
         "fecha_nacimiento",
         "direccion",
+        'id_tipo',
+        'id_origen'
     ];
 
-    public function Tasks(){
-        $this->hasMany(Task::class);
+    public function tasks(){
+        return $this->hasMany(Task::class,"id_contact");
     }
 
 
-    public function Comentarios(){
-        $this->hasMany(Origen::class);
+    public function comentarios(){
+        return $this->hasMany(Comentario::class,"id_contact");
     }
 
+    
     public function Origen(){
         $this->belongsTo(Origen::class);
     }
