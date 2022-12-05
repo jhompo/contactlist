@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    
+
     public function index()
     {
         $objContact = Contact::with("tasks","comentarios")->get();
-        return  $objContact;
+        return response()->json(($objContact));
     }
 
 
@@ -23,26 +23,26 @@ class ContactController extends Controller
         return response()->json(['message' => 'Contacto creado satisfactoriamente'], 201);
     }
 
-    
+
     public function show(Contact $contact)
     {
         return Contact::find($contact->id);
     }
 
-    
+
     public function update(Request $request, Contact $contact)
     {
-        try { 
+        try {
             $contact->update($request->all());
             return response(['message' => 'Contacto actualizado satisfactoriamente', 'status' => 200]);
-            
+
         } catch (ModelNotFoundException $e) {
             return response(['message' => 'Item Not Found!', 'status' => 404]);
         }
-       
+
     }
 
-    
+
     public function destroy(Contact $contact)
     {
         $contact->delete();

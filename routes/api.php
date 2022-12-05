@@ -23,13 +23,14 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
+Route::post('jlogin1', [ UserController::class, 'authenticate']);
 
 
 Route::apiResource('contact', ContactController::class); //->middleware('api');
 Route::apiResource('comentario', ComentarioController::class); //->middleware('api');
-Route::get('miscomentario/{idcontact}', [ComentarioController::class,"comentarios"]); //->middleware('api');
+Route::get('mycomments/{idcontact}', [ComentarioController::class,"comentarios"]); //->middleware('api');
 Route::apiResource('task', TaskController::class); //->middleware('api');
-Route::get('mistask/{idcontact}', [TaskController::class,"task"]); //->middleware('api');
+Route::get('mytasks/{idcontact}', [TaskController::class,"task"]); //->middleware('api');
 Route::apiResource('tipo', TipoController::class); //->middleware('api');
 Route::apiResource('origen', OrigenController::class); //->middleware('api');
 

@@ -9,7 +9,13 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        "id_contact",
+        "tarea",
+        "responsable"
+    ];
+
     public function contacts(){
-        $this->belongsTo(Contact::class,"id_contact","id");
+        return $this->belongsTo(Contact::class,"id_contact","id");
     }
 }

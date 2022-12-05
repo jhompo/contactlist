@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    
+
 
     public function index()
     {
-        $objTask = Task::all();
+        $objTask = Task::with("contacts")->get();
         return  $objTask;
     }
 
@@ -26,7 +26,7 @@ class TaskController extends Controller
            ], 201);
     }
 
-    
+
     public function show(Task $Task)
     {
         return Task::find($Task->id);
@@ -34,23 +34,23 @@ class TaskController extends Controller
 
     public function task($idcontact)
     {
-        return Task::where('id_contact',$idcontact)->get();
+        return Task::where('id_contact',$idcontact)->with("contacts")->get();
     }
-    
+
     public function update(Request $request, Task $Task)
     {
         try {
-            $objTask = Task::find($Task->id); 
+            $objTask = Task::find($Task->id);
             $objTask->update($request->all());
             return response(['message' => 'tarea actualizada satisfactoriamente', 'status' => 200]);
-            
+
         } catch (ModelNotFoundException $e) {
             return response(['message' => 'Item Not Found!', 'status' => 404]);
         }
-       
+
     }
 
-    
+
     public function destroy(Task $Task)
     {
         $Task->delete();

@@ -11,8 +11,8 @@ class ComentarioController extends Controller
 {
     public function index()
     {
-        $objComentario = Comentario::all();
-        return  $objComentario;
+        $objComentario = Comentario::with("contacts")->get();
+        return $objComentario;
     }
 
 
@@ -24,7 +24,7 @@ class ComentarioController extends Controller
            ], 201);
     }
 
-    
+
     public function show(Comentario $Comentario)
     {
         return Comentario::find($Comentario->id);
@@ -32,22 +32,22 @@ class ComentarioController extends Controller
 
     public function comentarios($idcontact)
     {
-        return Comentario::where('id_contact',$idcontact)->get();
+        return Comentario::where('id_contact',$idcontact)->with("contacts")->get();
     }
-    
+
     public function update(Request $request, Comentario $Comentario)
     {
         try {
             $Comentario->update($request->all());
             return response(['message' => 'Comentario actualizado satisfactoriamente', 'status' => 200]);
-            
+
         } catch (ModelNotFoundException $e) {
             return response(['message' => 'Item Not Found!', 'status' => 404]);
         }
-       
+
     }
 
-    
+
     public function destroy(Comentario $Comentario)
     {
         $Comentario->delete();
