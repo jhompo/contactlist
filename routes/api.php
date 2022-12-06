@@ -25,7 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 //Route::post('jlogin1', [ UserController::class, 'authenticate']);
 
-Route::group(['middleware' => ['cors']], function () {
+//Route::group(['middleware' => ['cors']], function () {
+
+    header("Access-Control-Allow-Origin: *");
+    //header("Access-Control-Allow-Headers: *");
+
     Route::apiResource('contact', ContactController::class); //->middleware('api');
     Route::apiResource('comentario', ComentarioController::class); //->middleware('api');
     Route::get('mycomments/{idcontact}', [ComentarioController::class,"comentarios"]); //->middleware('api');
@@ -33,5 +37,6 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('mytasks/{idcontact}', [TaskController::class,"task"]); //->middleware('api');
     Route::apiResource('tipo', TipoController::class); //->middleware('api');
     Route::apiResource('origen', OrigenController::class); //->middleware('api');
-});
+
+//});
 
