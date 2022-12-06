@@ -11,7 +11,7 @@ class ComentarioController extends Controller
 {
     public function index()
     {
-        $objComentario = Comentario::with("contacts")->get();
+        $objComentario = Comentario::with("contacts")->orderBy('created_at','DESC')->get();
         return $objComentario;
     }
 
@@ -32,7 +32,7 @@ class ComentarioController extends Controller
 
     public function comentarios($idcontact)
     {
-        return Comentario::where('id_contact',$idcontact)->with("contacts")->get();
+        return Comentario::where('id_contact',$idcontact)->with("contacts")->orderBy('created_at','DESC')->get();
     }
 
     public function update(Request $request, Comentario $Comentario)

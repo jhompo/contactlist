@@ -12,7 +12,8 @@ class Task extends Model
     protected $fillable =[
         "id_contact",
         "tarea",
-        "responsable"
+        "responsable",
+        "created_at"
     ];
 
     public function contacts(){

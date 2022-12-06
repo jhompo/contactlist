@@ -13,7 +13,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        $objTask = Task::with("contacts")->get();
+        $objTask = Task::with("contacts")->orderBy('created_at','DESC')->get();
         return  $objTask;
     }
 
@@ -34,7 +34,7 @@ class TaskController extends Controller
 
     public function task($idcontact)
     {
-        return Task::where('id_contact',$idcontact)->with("contacts")->get();
+        return Task::where('id_contact',$idcontact)->with("contacts")->orderBy('created_at','DESC')->get();
     }
 
     public function update(Request $request, Task $Task)
